@@ -1,4 +1,4 @@
-angular.module('routerApp', ['routerRoutes'])
+angular.module('routerApp', ['routerRoutes', 'ngAnimate'])
 
   //create the controller
   //this will be the controller for the entire site
@@ -16,7 +16,7 @@ angular.module('routerApp', ['routerRoutes'])
 
     var vm = this;
 
-    vm.message = 'This is the home page. It\'s pretty boring right now';
+    vm.message = 'Space... The final frontier. These are the voyages of the starship Enterprise. It\'s continuing mission, to explore strange new worlds. To seek out new life and new civilizations. To boldly go where no one has gone before.';
 
   })
 

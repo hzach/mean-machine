@@ -1,0 +1,18 @@
+body { padding-top:50px; }
+
+#content-views { position:relative; }
+
+.ng-enter, .ng-leave { width:100%; position:absolute; }
+.ng-enter {
+  /*Vendor prefixes*/
+  -wbkit-animation:zoomInDown 1.2s both ease-in;
+  -moz-animation:zoomInDown 1.2s both ease-in;
+    animation:zoominDown 1.2s both ease-in;
+}
+
+.ng-leave {
+  /*Vendor prefixes*/
+  -webkit-animation:zoomOutDown 0.5s both ease-in;
+  -moz-animation:zoomOutDown 0.5s both ease-in;
+    animation:zoomOutDown 0.5s both ease-in;
+}
