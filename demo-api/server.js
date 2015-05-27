@@ -33,6 +33,11 @@ app.get('/', function(req, res) {
 //get an instance of the express router
 var apiRouter = express.Router();
 
+// route for authenication
+apiRouter.post('/authenticate', function(req, res) {
+
+});
+
 //middleware to use for all requests
 apiRouter.use(function(req, res, next) {
   console.log('Somebody just came to our app!');
@@ -134,7 +139,7 @@ apiRouter.route('/users')
         },
        function(err, user) {
         if (err) res.send(err);
-        
+
         res.json({message: 'User was deleted!'});
       });
     });
