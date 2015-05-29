@@ -4,7 +4,7 @@ angular.module('authService', [])
 // facotry for handling tokens
 // inject $window to store token client-side
 //============================================
-  .facotry('Auth', function($http, $q, AuthToken) {
+  .factory('Auth', function($http, $q, AuthToken) {
 
     // create auth factory object
     var authFactory = {};
@@ -18,13 +18,13 @@ angular.module('authService', [])
       .success(function(data) {
         AuthToken.setToken(data.token);
         return data;
-      })
+      });
     };
 
     // handle logout
     authFactory.logout = function() {
       AuthToken.setToken();
-    }
+    };
 
     // check if a user is logged in
     authFactory.isLoggedIn = function() {
@@ -37,7 +37,7 @@ angular.module('authService', [])
     // get the user info
     authFactory.getUser = function() {
       if (AuthToken.getToken())
-        return $http.get('api/me');
+        return $http.get('api/me', { cache: true });
       else
         return $q.reject({ message: 'User has no token' });
     };
@@ -51,14 +51,14 @@ angular.module('authService', [])
   // factory for handling tokens
   // inject $window to store token client-side
   //===========================================
-  .facotry('AuthToken', function($window) {
+  .factory('AuthToken', function($window) {
 
     var AuthTokenFactory = {};
 
     // get the token
     AuthTokenFactory.getToken = function() {
       return $window.localStorage.getItem('token');
-    }
+    };
 
     // set the token or clear the token
     AuthTokenFactory.setToken = function(token) {
@@ -69,12 +69,12 @@ angular.module('authService', [])
     };
 
     return AuthTokenFactory;
-  });
+  })
 
   //=============================================================
   // Application configuration to inject token into http requests
   //=============================================================
-  .factory('AuthInterceptor' function($q, $location, AuthToken) {
+  .factory('AuthInterceptor', function($q, $location, AuthToken) {
 
     var interceptorFactory = {};
 
@@ -89,7 +89,7 @@ angular.module('authService', [])
         config.headers['x-access-token'] = token;
 
       return config;
-    }
+    };
 
     // redirect if token doesn't authenticate
     // happens on response errors
