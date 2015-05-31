@@ -21,13 +21,16 @@ angular.module('userService', [])
     };
 
     // update existing user
-    userFactory.putUser = function(userData) {
-      return $http.put('api/users/', userData);
+    userFactory.putUser = function(id, userData) {
+      return $http.put('api/users/' + id, userData);
     };
 
     // delete existing user
     userFactory.deleteUser = function(id) {
       return $http.delete('api/users/' + id);
+
     };
+
+    return userFactory;
 
   });

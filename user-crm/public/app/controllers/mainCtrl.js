@@ -1,4 +1,4 @@
-angular.module('mainCtrl', ['ngRoute'])
+angular.module('mainCtrl', [])
 
   .controller('mainController', function($rootScope, $location, Auth) {
 
@@ -12,18 +12,24 @@ angular.module('mainCtrl', ['ngRoute'])
       vm.loggedIn = Auth.isLoggedIn();
 
       // get user info on every route change
-      Auth.getUser().success(function(data) {
-        vm.user = data;
+      Auth.getUser().then(function(data) {
+        vm.user = data.data;
       });
+
     });
 
     // function to handle login form
     vm.doLogin = function() {
+      vm.processing = true;
+      vm.error = '';
       // call the Auth.login() function
-      Auth.login(vm.user.username, vm.user.password)
-        .success(function() {
+
+      Auth.login(vm.loginData.username, vm.loginData.password).success(function(data) {
+          vm.processing = false;
           // if a user successfully logs in, redirect to user's page
-          $location.path('/users');
+          if (data.success)
+            $location.path('/users');
+          else vm.error = data.message;
         });
     };
 

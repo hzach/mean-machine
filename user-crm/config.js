@@ -1,5 +1,5 @@
 module.exports = {
-  'database': 'mongodb://localhost:27017/users',
+  'database': 'mongodb://node:noder@novus.modulusmongo.net:27017/Iganiq8o',
   'secret': 'inthemajesticgulfoftimeandspacethejimmiesrustlesoftly',
   'port': process.env.PORT || 8080
 };

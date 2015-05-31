@@ -1,7 +1,23 @@
 <div class="jumbotron text-center">
   <h1>Welcome to our CRM!</h1>
-  Login to manage your users
-  <button type="submit" class="btn btn-primnary">
-  <span>Login</span>
-  </button>
+
+  <!-- DISPLAY LOGIN PROMPT IF NO TOKEN -->
+  <div ng-if="!main.loggedIn" >
+    <p>
+      Login to see your users
+    </p>
+    <a href="/login" class="btn btn-primary">Login</a>
+    <p>
+      Don't have an account? Register now!
+    </p>
+    <a href="/users/create" class="btn btn-primary">Create Account</a>
+  </div>
+
+    <!-- DISPLAY MANAGE USERS PROMPT IF TOKEN -->
+    <div ng-if="main.loggedIn">
+      <p>
+        Manage your users
+      </p>
+        <a href="/users" class="btn btn-primary">View Users</a>
+    </div>
 </div>

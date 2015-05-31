@@ -2,6 +2,7 @@ var bodyParser = require('body-parser');
 var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var config = require('../../config.js');
+var morgan = require('morgan');
 
 var superSecret = config.secret;
 
@@ -58,6 +59,8 @@ module.exports = function(app, express) {
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
+    console.log('Somebody just came to our app!');
+
     // decode token
     if (token) {
       // verifies secret and checks exp
@@ -83,11 +86,6 @@ module.exports = function(app, express) {
         message: 'Token not found'
       });
     }
-  });
-
-  apiRouter.use(function(req, res, next) {
-    console.log('Somebody just came to our app!');
-    next(); //make sure we move on to the next route
   });
 
   //more routes for our API will happen here

@@ -11,14 +11,14 @@ angular.module('authService', [])
 
     // handle login
     authFactory.login = function(username, password) {
-      $http.post('api/authenticate', {
-        username: username,
-        password: password
-      })
-      .success(function(data) {
-        AuthToken.setToken(data.token);
-        return data;
-      });
+      return $http.post('/api/authenticate', {
+                username: username,
+                password: password
+              })
+              .success(function(data) {
+                AuthToken.setToken(data.token);
+                return data;
+              });
     };
 
     // handle logout
