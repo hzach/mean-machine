@@ -3,7 +3,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
-var config = require('./config.js');
+var passport = require('passport');
+var configDB = require('./config/database.js');
 var path = require('path');
 
 //APP CONFIGURATION
@@ -12,7 +13,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 //connect to the database
-mongoose.connect(config.database);
+mongoose.connect(configDB.url);
+
+require('./config/passport')(passport);
 
 //configure our app to handle CORS requests
 app.use(function(req, res, next) {
